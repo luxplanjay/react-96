@@ -1,0 +1,19 @@
+.container {
+  border: 2px solid black;
+  padding: 4px;
+}
+
+.isPaid {
+  border-color: green;
+}
+
+.isPending {
+  border-color: orangered;
+}
+
+.icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: orange;
+}
