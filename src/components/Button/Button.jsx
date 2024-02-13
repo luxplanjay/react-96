@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import css from "./Button.module.css";
 
-export const Button = ({ variant, children }) => {
+export default function Button({ variant, children }) {
   return (
     <button
       className={clsx(
@@ -12,4 +12,4 @@ export const Button = ({ variant, children }) => {
       {children}
     </button>
   );
-};
+}

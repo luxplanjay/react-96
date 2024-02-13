@@ -2,15 +2,27 @@
   font: inherit;
   color: #212121;
   background-color: gray;
-  padding: 4px;
+  border: none;
+  margin: 0 4px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
 .primary {
   color: #fff;
-  background-color: blue;
+  background-color: #008dd5;
+}
+
+.primary:hover {
+  background-color: #005f8f;
 }
 
 .secondary {
   color: #fff;
-  background-color: orange;
+  background-color: #f56476;
+}
+
+.secondary:hover {
+  background-color: #f22c43;
 }
