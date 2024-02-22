@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 320px;
+}
+
+.error {
+  display: block;
+  font-size: 14px;
+  color: orangered;
+}
