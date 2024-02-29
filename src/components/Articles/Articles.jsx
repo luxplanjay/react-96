@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import css from "./App.module.css";
+import css from "./Articles.module.css";
 import ArticleList from "../ArticleList/ArticleList";
 import { fetchArticles } from "../../article-api";
 import SearchForm from "../SearchForm/SearchForm";
 import ErrorMessage from "../ErrorMessage";
 
-export default function App() {
+export default function Articles() {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState([]);
