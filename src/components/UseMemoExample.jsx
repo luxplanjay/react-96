@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-export const UseMemoExample = () => {
+export default function UseMemoExample() {
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
 
-  console.log("Calculating value");
-  const value = a + b;
+  const value = useMemo(() => {
+    console.log("Calculating value a + b");
+    return a + b;
+  }, [a, b]);
+
+  const x = useMemo(() => {
+    console.log("Calculating value b + c");
+    return b + c;
+  }, [b, c]);
 
   return (
     <div>
@@ -14,6 +21,7 @@ export const UseMemoExample = () => {
       <button onClick={() => setB(b + 1)}>update b: {b}</button>
       <button onClick={() => setC(c + 1)}>update c: {c}</button>
       <p>value: {value}</p>
+      <p>x: {x}</p>
     </div>
   );
-};
+}

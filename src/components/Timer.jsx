@@ -1,7 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export const Timer = () => {
-  useEffect(() => {}, []);
+export default function Timer() {
+  const intervalId = useRef();
 
-  return <div>{/* <button>Stop interval</button> */}</div>;
-};
+  useEffect(() => {
+    intervalId.current = setInterval(() => {
+      console.log(Date.now());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId.current);
+    };
+  }, []);
+
+  const stopInterval = () => {
+    clearInterval(intervalId.current);
+  };
+
+  return (
+    <div>
+      <button onClick={stopInterval}>Stop interval</button>
+    </div>
+  );
+}

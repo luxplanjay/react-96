@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 const formStyles = {
   display: "grid",
   width: 320,
@@ -6,11 +8,22 @@ const formStyles = {
   border: "1px solid black",
 };
 
-export const RefExample = () => {
+export default function RefExample() {
+  const formRef = useRef();
+
+  const handleScroll = () => {
+    const dims = formRef.current.getBoundingClientRect();
+
+    window.scrollTo({
+      top: dims.top,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <div>
-        <button>Schedule a coaching session</button>
+        <button onClick={handleScroll}>Schedule a coaching session</button>
       </div>
 
       <div>
@@ -311,7 +324,7 @@ export const RefExample = () => {
         </p>
       </div>
 
-      <form style={formStyles}>
+      <form style={formStyles} ref={formRef}>
         <input type="email" placeholder="Your email" />
         <button>Schedule now</button>
       </form>
@@ -348,4 +361,4 @@ export const RefExample = () => {
       </div>
     </>
   );
-};
+}
