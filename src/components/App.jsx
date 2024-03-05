@@ -1,29 +1,26 @@
-import { useRef, useState, forwardRef, useContext } from "react";
-import { LangSwitcher } from "./LangSwitcher";
-// import Articles from "./Articles/Articles";
-// import UseMemoExample from "./UseMemoExample";
-// import RefExample from "./RefExample";
-// import Timer from "./Timer";
-import langContext from "../lang-context";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./Navigation/Navigation";
+import HomePage from "../pages/HomePage";
+import PaymentsPage from "../pages/PaymentsPage";
+import PaymentDetailsPage from "../pages/PaymentDetailsPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import ClientInfo from "./ClientInfo";
+import PaymentReceipt from "./PaymentReceipt";
 
 export default function App() {
-  // const [isVisible, setIsVisible] = useState(false);
-
-  const ctxValue = useContext(langContext);
-  console.log(ctxValue);
-
   return (
     <div>
-      {/* <Articles /> */}
-      {/* <UseMemoExample /> */}
-      {/* <RefExample /> */}
-      {/* <button onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? "Hide" : "Show"}
-      </button> */}
-      {/* {isVisible && <Timer />} */}
+      <Navigation />
 
-      <LangSwitcher />
-      <p>Current lang: {ctxValue.lang}</p>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/payments" element={<PaymentsPage />} />
+        <Route path="/payments/:paymentId" element={<PaymentDetailsPage />}>
+          <Route path="client" element={<ClientInfo />} />
+          <Route path="receipt" element={<PaymentReceipt />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }
