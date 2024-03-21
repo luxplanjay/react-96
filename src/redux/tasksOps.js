@@ -38,15 +38,3 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
-
-export const updateTask = createAsyncThunk(
-  "tasks/updateTask",
-  async (update, thunkAPI) => {
-    try {
-      const response = await axios.put(`/tasks/${update.id}`, update);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);

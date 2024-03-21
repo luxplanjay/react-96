@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchTasks, deleteTask, addTask, updateTask } from "./tasksOps";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { fetchTasks, deleteTask, addTask } from "./tasksOps";
+import { selectTextFilter } from "./filtersSlice";
 
 const slice = createSlice({
   name: "tasks",
@@ -47,13 +48,34 @@ const slice = createSlice({
       .addCase(addTask.rejected, (state) => {
         state.loading = false;
         state.error = true;
-      })
-      .addCase(updateTask.fulfilled, (state, action) => {
-        const taskIndex = state.items.findIndex(
-          (item) => item.id === action.payload.id
-        );
-        state.items[taskIndex] = action.payload;
       }),
 });
 
 export default slice.reducer;
+
+export const selectLoading = (state) => state.tasks.loading;
+
+export const selectError = (state) => state.tasks.error;
+
+export const selectTasks = (state) => state.tasks.items;
+
+// export const selectVisibleTasks = (state) => {
+//   console.log("selectVisibleTasks");
+
+//   const tasks = selectTasks(state);
+//   const textFilter = selectTextFilter(state);
+
+// return tasks.filter((task) =>
+//   task.text.toLowerCase().includes(textFilter.toLowerCase())
+// );
+// };
+
+export const selectVisibleTasks = createSelector(
+  [selectTasks, selectTextFilter],
+  (tasks, textFilter) => {
+    console.log("selectVisibleTasks");
+    return tasks.filter((task) =>
+      task.text.toLowerCase().includes(textFilter.toLowerCase())
+    );
+  }
+);

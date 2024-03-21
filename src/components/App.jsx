@@ -6,34 +6,25 @@ import { fetchTasks } from "../redux/tasksOps";
 import Loader from "./Loader/Loader";
 import Error from "./Error/Error";
 import TaskForm from "./TaskForm/TaskForm";
-import toast, { Toaster } from "react-hot-toast";
+import TextFilter from "./TextFilter/TextFilter";
+import { selectError, selectLoading } from "../redux/tasksSlice";
 
 export default function App() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.tasks.loading);
-  const error = useSelector((state) => state.tasks.error);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchTasks())
-      .unwrap()
-      .then((value) => {
-        // console.log(value);
-        toast.success("fetchTasks fulfilled");
-      })
-      .catch((err) => {
-        // console.log(err);
-        toast.error("fetchTasks rejected");
-      });
+    dispatch(fetchTasks());
   }, [dispatch]);
 
   return (
     <Layout>
-      <h1>HTTP requests with Redux</h1>
       <TaskForm />
+      <TextFilter />
       {error && <Error>Error message</Error>}
       {loading && <Loader>Loading message</Loader>}
       <TaskList />
-      <Toaster />
     </Layout>
   );
 }
