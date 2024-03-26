@@ -34,4 +34,3 @@ Base URL бекенду: https://goit-task-manager.herokuapp.com/
 - Написати операцію `logOut`
 - Використати в компоненті `UserMenu`
 - Обробити результат у `authSlice`
-- Обробити операцію у `tasksSlice`
