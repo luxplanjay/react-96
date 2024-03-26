@@ -1,16 +1,17 @@
-import { useDispatch } from "react-redux";
-import css from "./Task.module.css";
-import { deleteTask } from "../../redux/tasksOps";
+import { useDispatch } from 'react-redux';
+import { deleteTask } from '../../redux/tasks/operations';
+import css from './Task.module.css';
 
-export default function Task({ task }) {
+export const Task = ({ id, text }) => {
   const dispatch = useDispatch();
+  const handleDelete = () => dispatch(deleteTask(id));
 
   return (
     <div className={css.wrapper}>
-      <p className={css.text}>{task.text}</p>
-      <button className={css.btn} onClick={() => dispatch(deleteTask(task.id))}>
+      <p className={css.text}>{text}</p>
+      <button type="button" className={css.button} onClick={handleDelete}>
         Delete
       </button>
     </div>
   );
-}
+};
